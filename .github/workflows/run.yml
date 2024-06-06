@@ -47,7 +47,7 @@ jobs:
       - name: Run test
         run: pnpm test
         env:
-           skus                         : ${{secrets.skus}}
+           skus                         : C050003124
            userId                       : ${{secrets.userId}}
            province                     : ${{secrets.province}}
            city                         : ${{secrets.city}}

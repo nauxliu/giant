@@ -12,6 +12,8 @@ export async function getSkuStock(sku: string, shopno: string, userId: string) {
   formData.append("sku", sku);
   formData.append("shopno", shopno);
   formData.append("user_id", userId);
+  formData.append("user_long", '116.48912625976562');
+  formData.append("user_lat", '39.99944331298828');
 
   const resp = await axios.post(
     "https://e-gw.giant.com.cn/index.php/api/sku_stock",
@@ -34,6 +36,8 @@ export async function getShopList(page: number, options: ShopListOptions) {
   }
   formData.append("per_page", perPage.toString());
   formData.append("page", page.toString());
+  formData.append("user_long", '116.48912625976562');
+  formData.append("user_lat", '39.99944331298828');
 
   const resp = await axios.post(
     "https://e-gw.giant.com.cn/index.php/api/store_list",
