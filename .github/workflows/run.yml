@@ -47,10 +47,12 @@ jobs:
       - name: Run test
         run: pnpm test
         env:
-           skus                         : C050003124
+          #  skus                         : C050003124 # defy adv3 s
+          #  skus: C050002224 # defay adv2 绿 s
+           skus: C050001124 # DDefy adv1 灰 s
            userId                       : ${{secrets.userId}}
-           province                     : '130000' # 河北
-          #  province                     : '110000' # beijing
+          #  province                     : '130000' # 河北
+           province                     : '110000' # beijing
           #  city                         : '1' # beijing
            area                         : ${{secrets.area}}
            perPage                      : ${{secrets.perPage}}

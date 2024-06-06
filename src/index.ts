@@ -46,8 +46,6 @@ export async function create(
       log(`开始检查库存 (第 ${count} 次): ${sku} ${shop.name}`);
 
       try {
-        log(`切换商店 ( ${shop.name}): ${sku} ${shop.name}`);
-
         const resp1 = await switchStoreControl(userId, shop.code)
 
         if (resp1.status === 2) {
@@ -67,10 +65,11 @@ export async function create(
           throw new Error(`未知错误: ${resp.status}, ${resp.msg}`);
         }
 
-        if (resp.data.stock > 0) {
-          log(`${shop.name} ${sku} 库存有货!!!`);
-          succeedCallback?.(sku, shop);
-        }
+        log(`库存： ${resp.data}`)
+        // if (resp.data.stock > 0) {
+        //   log(`${shop.name} ${sku} 库存有货!!!`);
+        //   succeedCallback?.(sku, shop);
+        // }
       } catch (e) {
         log(`检查库存 ${sku} ${shop.name} 出错了`, e);
       }
