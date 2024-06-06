@@ -49,8 +49,9 @@ jobs:
         env:
            skus                         : C050003124
            userId                       : ${{secrets.userId}}
-           province                     : ${{secrets.province}}
-           city                         : ${{secrets.city}}
+           province                     : '130000' # 河北
+          #  province                     : '110000' # beijing
+          #  city                         : '1' # beijing
            area                         : ${{secrets.area}}
            perPage                      : ${{secrets.perPage}}
            interval                     : ${{secrets.interval}}
