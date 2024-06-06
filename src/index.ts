@@ -1,4 +1,4 @@
-import { getSkuStock, getShopList, refreshToken } from "./api";
+import { getSkuStock, getShopList, refreshToken, switchStore } from "./api";
 import type { Options, Shop, SucceedCallback } from "./types";
 import { createCallIntervalControl, log } from "./utils";
 
@@ -8,6 +8,7 @@ export async function create(
 ) {
   let userId = options.userId;
   const factory = createCallIntervalControl(options.interval, options.maxRetry);
+  const switchStoreControl = factory(switchStore);
   const getSkuStockControl = factory(getSkuStock);
   const getShopListControl = factory(getShopList);
 
@@ -45,6 +46,18 @@ export async function create(
       log(`开始检查库存 (第 ${count} 次): ${sku} ${shop.name}`);
 
       try {
+        log(`切换商店 ( ${shop.name}): ${sku} ${shop.name}`);
+
+        const resp1 = await switchStoreControl(userId, shop.code)
+
+        if (resp1.status === 2) {
+          await refreshUserId()
+          return worker(sku, shop);
+        }
+        if (resp1.status !== 1) {
+          throw new Error(`未知错误: ${resp1.status}, ${resp1.msg}`);
+        }
+
         const resp = await getSkuStockControl(sku, shop.code, userId);
         if (resp.status === 2) {
           await refreshUserId()

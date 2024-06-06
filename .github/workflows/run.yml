@@ -55,7 +55,7 @@ jobs:
            perPage                      : ${{secrets.perPage}}
            interval                     : ${{secrets.interval}}
            maxRetry                     : ${{secrets.maxRetry}}
-           maxLoop                      : ${{secrets.maxLoop}}
+           maxLoop                      : 1
            randomInterval               : ${{secrets.randomInterval}}
            serverToken                  : ${{secrets.serverToken}}
         

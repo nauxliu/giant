@@ -22,6 +22,18 @@ export async function getSkuStock(sku: string, shopno: string, userId: string) {
   return resp.data as SkuStockResponse;
 }
 
+export async function switchStore(userId: string, shopno: string) {
+  const formData = new FormData();
+  formData.append("code", shopno);
+  formData.append("user_id", userId);
+
+  const resp = await axios.post(
+    "https://e-gw.giant.com.cn/index.php/api/do_store",
+    formData
+  );
+  return resp.data as SkuStockResponse;
+}
+
 export async function getShopList(page: number, options: ShopListOptions) {
   const { province, city, area, perPage = 10 } = options;
   const formData = new FormData();
